@@ -122,6 +122,13 @@ var flowchart = {
 		};
 
 		//
+		// The type of the node.
+		//
+		this.type = function () {
+			return this.data.type || "";
+		}
+
+		//
 		// X coordinate of the node.
 		//
 		this.x = function () {
