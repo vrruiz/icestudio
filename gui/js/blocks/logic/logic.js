@@ -38,7 +38,7 @@ angular.module('app')
             vcode: andv,
             id: nodeID,
             x: 50, y: 100,
-            width: 100,
+            width: 130,
             inputConnectors: [
                 { name: "a", label: "" },
                 { name: "b", label: "" }
