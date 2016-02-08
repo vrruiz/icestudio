@@ -19,7 +19,7 @@ angular.module('app')
             vcode: notv,
             id: nodeID,
             x: 50, y: 100,
-            width: 100,
+            width: 120,
             inputConnectors: [
                 { name: "i", label: "" }
             ],
@@ -38,7 +38,7 @@ angular.module('app')
             vcode: andv,
             id: nodeID,
             x: 50, y: 100,
-            width: 130,
+            width: 120,
             inputConnectors: [
                 { name: "a", label: "" },
                 { name: "b", label: "" }
@@ -58,7 +58,7 @@ angular.module('app')
             vcode: orv,
             id: nodeID,
             x: 50, y: 100,
-            width: 100,
+            width: 120,
             inputConnectors: [
                 { name: "a", label: "" },
                 { name: "b", label: "" }

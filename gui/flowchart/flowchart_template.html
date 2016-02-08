@@ -30,9 +30,10 @@
     ng-mousedown="nodeMouseDown($event, node)"
     ng-attr-transform="translate({{node.x()}}, {{node.y()}})"
     >
-    <g class="{{(node.type() != 'andx') ? 'show' : 'hide'}}">
+    <g
+      ng-if="(node.type() != 'notx') && (node.type() != 'andx') && (node.type() != 'orx')">
         <rect
-          ng-attr-class="{{(node.type() != 'andx') ? (node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect')) : 'hide'}}"
+          ng-attr-class="{{(node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect'))}}"
           ry="10"
           rx="10"
           x="0"
@@ -54,142 +55,137 @@
           >
           {{node.label()}}
         </text>
-
-        <g
-          ng-repeat="connector in node.inputConnectors"
-          ng-mousedown="connectorMouseDown($event, node, connector, $index, true)"
-          class="connector input-connector"
-          >
-          <circle
-            ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
-            ng-attr-r="{{connectorSize}}"
-            ng-attr-cx="{{connector.x()}}"
-            ng-attr-cy="{{connector.y()}}"
-            />
-        </g>
-
-        <g
-          ng-repeat="connector in node.outputConnectors"
-          >
-          <text
-            ng-attr-x="{{connector.x() - 20}}"
-            ng-attr-y="{{connector.y()}}"
-            cursor="pointer"
-            text-anchor="end"
-            alignment-baseline="middle"
-            >
-            {{connector.label()}}
-          </text>
-        </g>
-
-        <g
-          ng-repeat="connector in node.inputConnectors"
-          >
-          <text
-            ng-attr-x="{{connector.x() + 20}}"
-            ng-attr-y="{{connector.y()}}"
-            cursor="pointer"
-            text-anchor="left"
-            alignment-baseline="middle"
-            >
-            {{connector.label()}}
-          </text>
-        </g>
-
-        <g
-          ng-repeat="connector in node.outputConnectors"
-          ng-mousedown="connectorMouseDown($event, node, connector, $index, false)"
-          class="connector output-connector"
-          >
-          <circle
-            ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
-            ng-attr-r="{{connectorSize}}"
-            ng-attr-cx="{{connector.x()}}"
-            ng-attr-cy="{{connector.y()}}"
-            />
-        </g>
     </g>
 
-   <!-- AND GATE -->
+    <!-- NOT GATE -->
     <g
-        class="{{(node.type() == 'andx') ? 'show' : 'hide'}}"
-        ng-attr-class="{{(node.type() == 'andx') ? (node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect')) : 'hide'}}"
-        >
-        <line transform="translate(-319.81134, -408.43105)"
-           x1="319.81134"
-           y1="423.23495"
-           x2="349.22552"
-           y2="423.23495" />
-        <line transform="translate(-319.81134, -408.43105)"
-           x1="424.47531"
-           y1="438.07639"
-           x2="452.90503"
-           y2="438.07639" />
-        <path transform="translate(-319.81134, -408.43105)"
-           fill="url(#nodeBackgroundGradient)"
-           d="m 349.53754,408.43105 c 14.83511,0 29.67036,0 44.50547,0 2.19814,0 4.67104,0.27472 7.41727,0.82417 2.74767,0.54946 5.4939,1.64831 8.21711,3.29677 2.74767,1.62343 5.4939,4.12093 8.24157,7.39267 2.74767,3.29662 4.67103,7.16782 5.76866,11.53848 1.0989,4.39555 1.0989,8.79124 0,13.18679 -1.09889,4.39556 -3.02243,8.24172 -5.76866,11.53849 -2.74767,3.27174 -5.4939,5.74421 -8.24157,7.41755 -2.72178,1.62343 -5.46944,2.72235 -8.21711,3.27174 -2.74767,0.54945 -5.21913,0.82419 -7.41727,0.82419 -2.19813,0 -10.16494,0 -23.90112,0 -13.73691,0 -20.60435,0 -20.60435,0 0,0 0,-9.89017 0,-29.67032 l 0,-29.62037 z" />
-        <line transform="translate(-319.81134, -408.43105)"
-           y2="452.91745"
-           x2="349.22552"
-           y1="452.91745"
-           x1="319.81134" />
+       ng-if="(node.type() == 'notx')"
+       transform="matrix(0.35674544,0,0,0.35674544,13.982584,46.676956)"
+       ng-attr-class="{{(node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect'))}}"
+       >
+       <path
+         d="m 159.25341,-73.298273 113,0" />
+       <path
+         d="m -25.179254,-72.73818 113,0" />
+       <path
+         fill="url(#nodeBackgroundGradient)"
+         d="M 50.820746,-151.98817 164.10145,-72.738191 50.820746,6.51177 l 0,-158.49994 z" />
+       <path
+         fill="url(#nodeBackgroundGradient)"
+         transform="translate(-100.00768,-162.58209)"
+         d="m 305.47014,89.843887 c 0,11.129943 -9.0226,20.152543 -20.15254,20.152543 -11.12995,0 -20.15255,-9.0226 -20.15255,-20.152543 0,-11.129942 9.0226,-20.152544 20.15255,-20.152544 11.12994,0 20.15254,9.022602 20.15254,20.152544 z"  />
 
-           <g
-             ng-repeat="connector in node.inputConnectors"
-             ng-mousedown="connectorMouseDown($event, node, connector, $index, true)"
-             class="connector input-connector"
-             >
-             <circle
-               ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
-               ng-attr-r="{{connectorSize}}"
-               ng-attr-cx="{{connector.x()}}"
-               ng-attr-cy="{{connector.y()}}"
-               />
-           </g>
-
-           <g
-             ng-repeat="connector in node.outputConnectors"
-             >
-             <text
-               ng-attr-x="{{connector.x() - 20}}"
-               ng-attr-y="{{connector.y() + 10}}"
-               cursor="pointer"
-               text-anchor="end"
-               alignment-baseline="middle"
-               >
-               {{connector.label()}}
-             </text>
-           </g>
-
-           <g
-             ng-repeat="connector in node.inputConnectors"
-             >
-             <text
-               ng-attr-x="{{connector.x() + 20}}"
-               ng-attr-y="{{connector.y()}}"
-               cursor="pointer"
-               text-anchor="left"
-               alignment-baseline="middle"
-               >
-               {{connector.label()}}
-             </text>
-           </g>
-
-           <g
-             ng-repeat="connector in node.outputConnectors"
-             ng-mousedown="connectorMouseDown($event, node, connector, $index, false)"
-             class="connector output-connector"
-             >
-             <circle
-               ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
-               ng-attr-r="{{connectorSize}}"
-               ng-attr-cx="{{connector.x()}}"
-               ng-attr-cy="{{connector.y() + 10}}"
-               />
-           </g>
-         </g>
     </g>
+    <!-- NOT GATE -->
+
    <!-- AND GATE -->
+   <g
+      ng-if="(node.type() == 'andx')"
+      ng-attr-class="{{(node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect'))}}"
+      >
+     <line
+        y2="19.7"
+        x2="25.23"
+        y1="19.7"
+        x1="0" />
+     <line
+        y2="32.43"
+        x2="114.18"
+        y1="32.43"
+        x1="89.79" />
+     <path
+        fill="url(#nodeBackgroundGradient)"
+        d="m 25.5,7 c 12.7275,0 25.45512,0 38.18262,0 1.88585,0 4.00743,0.23569 6.36351,0.70708 2.35731,0.4714 4.71338,1.41414 7.04971,2.8284 2.35731,1.3928 4.71339,3.53548 7.0707,6.34241 2.35731,2.82827 4.00742,6.14949 4.94911,9.89921 0.94278,3.77108 0.94278,7.54228 0,11.31336 -0.94277,3.77109 -2.59304,7.07083 -4.94911,9.89923 -2.35731,2.80693 -4.71339,4.92813 -7.0707,6.36375 -2.3351,1.39279 -4.6924,2.33558 -7.04971,2.80692 -2.35732,0.47139 -4.47766,0.7071 -6.36351,0.7071 -1.88584,0 -8.72082,0 -20.50551,0 -11.78532,0 -17.67711,0 -17.67711,0 0,0 0,-8.48508 0,-25.45509 l 0,-25.41223 z" />
+     <line
+        x1="0"
+        y1="45.16"
+        x2="25.23"
+        y2="45.16" />
+   </g>
+   <!-- AND GATE -->
+
+   <!-- OR GATE -->
+   <g
+      ng-if="(node.type() == 'orx')"
+      transform="matrix(0.79234841,0,0,0.79234841,-19.051956,3)"
+      ng-attr-class="{{(node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect'))}}"
+      >
+        <line
+           y2="22.664833"
+           x2="56.259785"
+           y1="22.664833"
+           x1="25.207239" />
+        <line
+           y2="52.335159"
+           x2="56.456825"
+           y1="52.335159"
+           x1="25.044922" />
+        <line
+           y2="37.512558"
+           x2="164.64961"
+           y1="37.512558"
+           x1="132.8087" />
+        <path
+           fill="url(#nodeBackgroundGradient)"
+           d="m 49.976203,7.8421765 3.297202,7.4172665 c 2.198135,4.944366 3.57197,9.065869 4.121503,12.363071 0.549448,3.297202 0.799198,6.592966 0.799198,9.890169 0,3.271308 -0.24975,6.56851 -0.799198,9.865713 -0.549447,3.297202 -1.923368,7.417267 -4.121503,12.36307 -2.198135,4.944365 -3.297202,7.417267 -3.297202,7.417267 0,0 3.297202,0 9.890169,0 6.592966,0 11.53877,0 14.835109,0 3.271308,0 7.467617,-0.274723 12.563032,-0.824171 5.06952,-0.549447 10.290091,-1.923368 15.659267,-4.121503 5.34429,-2.198135 10.21528,-4.919909 14.6104,-8.217112 4.39627,-3.297202 7.9668,-6.867733 10.71447,-10.714469 2.74767,-3.846736 4.12151,-5.768666 4.12151,-5.768666 0,0 -1.37362,-1.923368 -4.12151,-5.768665 -2.74767,-3.846737 -6.3182,-7.417267 -10.71447,-10.71447 -4.39627,-3.271308 -9.26583,-6.043432 -14.6104,-8.217112 C 97.553597,10.61443 92.334465,9.240596 87.264513,8.6910623 82.194992,8.1416148 77.998683,7.8668911 74.701481,7.8668911 c -3.297202,0 -8.241568,0 -14.835109,0 l -9.890169,-0.024973 z" />
+   </g>
+   <!-- OR GATE -->
+
+   <g
+     ng-repeat="connector in node.outputConnectors"
+     >
+     <text
+       ng-attr-x="{{connector.x() - 20}}"
+       ng-attr-y="{{connector.y()}}"
+       cursor="pointer"
+       text-anchor="end"
+       alignment-baseline="middle"
+       >
+       {{connector.label()}}
+     </text>
+   </g>
+
+   <g
+     ng-repeat="connector in node.inputConnectors"
+     >
+     <text
+       ng-attr-x="{{connector.x() + 20}}"
+       ng-attr-y="{{connector.y()}}"
+       cursor="pointer"
+       text-anchor="left"
+       alignment-baseline="middle"
+       >
+       {{connector.label()}}
+     </text>
+   </g>
+
+   <g
+     ng-repeat="connector in node.inputConnectors"
+     ng-mousedown="connectorMouseDown($event, node, connector, $index, true)"
+     class="connector input-connector"
+     >
+     <circle
+       ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
+       ng-attr-r="{{connectorSize}}"
+       ng-attr-cx="{{connector.x()}}"
+       ng-attr-cy="{{connector.y()}}"
+       />
+   </g>
+
+   <g
+     ng-repeat="connector in node.outputConnectors"
+     ng-mousedown="connectorMouseDown($event, node, connector, $index, false)"
+     class="connector output-connector"
+     >
+     <circle
+       ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
+       ng-attr-r="{{connectorSize}}"
+       ng-attr-cx="{{connector.x()}}"
+       ng-attr-cy="{{connector.y()}}"
+       />
+   </g>
+
+  </g>
 
   <g>
     <g
@@ -199,8 +195,8 @@
       >
         <path
           ng-attr-class="{{connection.selected() && 'selected-connection-line' || (connection == mouseOverConnection && 'mouseover-connection-line' || 'connection-line')}}"
-          ng-attr-d="M {{connection.sourceCoordX()}}, {{connection.sourceCoordY() + 10}}
-                     C {{connection.sourceTangentX()}}, {{connection.sourceTangentY() + 10}}
+          ng-attr-d="M {{connection.sourceCoordX()}}, {{connection.sourceCoordY()}}
+                     C {{connection.sourceTangentX()}}, {{connection.sourceTangentY()}}
                        {{connection.destTangentX()}}, {{connection.destTangentY()}}
                        {{connection.destCoordX()}}, {{connection.destCoordY()}}"
           >
@@ -219,7 +215,7 @@
             ng-attr-class="{{connection.selected() && 'selected-connection-endpoint' || (connection == mouseOverConnection && 'mouseover-connection-endpoint' || 'connection-endpoint')}}"
             r="3"
             ng-attr-cx="{{connection.sourceCoordX()}}"
-            ng-attr-cy="{{connection.sourceCoordY() + 10}}"
+            ng-attr-cy="{{connection.sourceCoordY()}}"
             >
         </circle>
 
