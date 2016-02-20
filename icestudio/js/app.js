@@ -293,11 +293,13 @@ angular.module('app', ['flowChart', ])
 			document.getElementById('warning').style.opacity = '0.0';
 			document.getElementById('pinout').style.height = '490px';
 			document.getElementById('pinout-img').style.height = '490px';
+            $("#pinout-img").elevateZoom({ zoomType : "inner" });
 		} else {
 			document.getElementById('pinout').style.height = '0px';
             document.getElementById('pinout-img').style.height = '0px';
 			document.getElementById('BQLogo').style.opacity = '1.0';
 			document.getElementById('warning').style.opacity = '1.0';
+            $('#pinout-img').removeData('elevateZoom');
 		}
     }
 }]);
