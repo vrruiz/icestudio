@@ -26,6 +26,17 @@ Generic reset.
 	visibility: hidden;
 }
 
+#pinout {
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 490px;
+	opacity: 0.0;
+	position: absolute;
+	float: bottom;
+	visibility: hidden;
+}
+
 .warning {
 	margin: 5;
 	padding: 5;
@@ -154,4 +165,9 @@ Drag selection rectangle.
 	stroke: #C3D7DF;
 	stroke-width: 2;
 	fill: transparent;
+}
+
+#pinout-img {
+    max-width: 100%;
+    height: auto;
 }

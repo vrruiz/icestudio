@@ -39,6 +39,7 @@ angular.module('app', ['flowChart', ])
 	var nextNodeID = 10;
 
 	$scope.showEditor = false;
+    $scope.showPinout = false;
 
 	$scope.filepath = 'gen/main.json'
 
@@ -264,4 +265,23 @@ angular.module('app', ['flowChart', ])
 			document.getElementById('warning').style.opacity = '1.0';
 		}
 	};
+
+    // Show pinout
+    $scope.pinout = function () {
+		document.getElementById('pinout').style.opacity = '1.0';
+		document.getElementById('pinout').style.visibility = 'visible';
+        $scope.showPinout = !$scope.showPinout;
+		if ($scope.showPinout) {
+            if ($scope.showEditor) $scope.toogleEditor();
+			document.getElementById('BQLogo').style.opacity = '0.0';
+			document.getElementById('warning').style.opacity = '0.0';
+			document.getElementById('pinout').style.height = '490px';
+			document.getElementById('pinout-img').style.height = '490px';
+		} else {
+			document.getElementById('pinout').style.height = '0px';
+            document.getElementById('pinout-img').style.height = '0px';
+			document.getElementById('BQLogo').style.opacity = '1.0';
+			document.getElementById('warning').style.opacity = '1.0';
+		}
+    }
 }]);
